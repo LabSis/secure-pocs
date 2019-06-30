@@ -1,0 +1,4 @@
+Instala todas las dependencias que encuentre en package.json
+npm install
+Ejectua la el servidor en http://localhost:3000/
+node index.js

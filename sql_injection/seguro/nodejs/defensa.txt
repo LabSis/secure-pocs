@@ -1,0 +1,4 @@
+Reemplazar línea 36:
+"WHERE n.id >= 2 AND t.id = " + tipo + " " +
+Por:
+"WHERE n.id >= 2 AND t.id = " + mysql.escape(tipo) + " " +
