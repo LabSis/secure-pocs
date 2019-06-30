@@ -21,7 +21,7 @@ Listing of protection mechanism
 Pruebas de concepto (Versión en español)
 =====================================
 
-Este proyecto presenta varios ejemplos de vulnerabilidad, ataques y mecanismos de protección.
+Este proyecto presenta varios ejemplos de ataques y mecanismos de protección.
 
 Listado de ataques
 -------------------
