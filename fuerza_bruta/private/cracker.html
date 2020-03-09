@@ -1,53 +1,197 @@
 <html>
 	<head>
-	    <title>LabSis - Cracker</title>
+	    <title>Fuerza bruta</title>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 	    <style>
-	        div {
-	            margin-top: 10px;
-	        }
+	        
 	    </style>
 	</head>
 	<body>
-		<h3>LabSis - Fuerza bruta</h3>
-		<div>
-			<input type="radio" value="prueba-javascript" /> Prueba en JavaScript
-			<input type="radio" value="prueba-api-web" /> Prueba en API web
-		</div>
+	    <nav class="navbar navbar-expand-lg navbar-dark bg-dark"">
+            <a class="navbar-brand" href="#">Fuerza bruta</a>
+        </nav>
+	    <div class="container" style="padding-top: 30px">
+		    <div style="text-align: center; margin-top: 30px;" class="d-none">
+			    <input type="radio" value="prueba-javascript" name="chkTipoPrueba" id="chkPruebaJavaScript" checked />
+			    <label for="chkPruebaJavaScript">Prueba en JavaScript</label>
+			    
+			    <input type="radio" value="prueba-api-web" name="chkTipoPrueba" id="chkPruebaAPIWeb" />
+			    <label for="chkPruebaAPIWeb">Prueba en API web</label>
+		    </div>
+		    
+		    <div id="divPruebaJavaScript">
+		        <p>
+				    Esta prueba sirve para tener una idea del tiempo que demora un algoritmo de fuerza bruta en comparar todas las claves posibles.
+			    </p>
+			    <div>
+				    <label>Alfabeto de la clave</label>
+			    </div>
+			    <div class="input-group mb-3">
+                    <input type="text" id="txtAlfabetoPruebaJavaScript" value="" class="form-control" />
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="spanLongitudAlfabeto">Min</span>
+                    </div>
+                </div>
+                <div>
+				    <label>Longitud de la clave</label>
+			    </div>
+			    <div class="input-group mb-3">
+                    <input type="number" id="txtLongitudClavePruebaJavaScript" value="" class="form-control" />
+                </div>
+			    <div>
+				    <input type="button" class="btn-empezar btn btn-primary" value="Empezar" style="padding: 4px" />
+			    </div>
+			    <div class="div-resultados d-none">
+			        <div style="margin-top: 15px">
+			            Demora
+			            <div class="input-group mb-3">
+                            <input type="text" id="txtTiempoPruebaJavaScript" disabled value="" class="form-control" />
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="spanTiempoPruebaJavaScript">Min</span>
+                            </div>
+                        </div>
+			        </div>
+			        <div style="margin-top: 15px">
+			            Combinaciones
+			            <div class="input-group mb-3">
+                            <input type="text" id="txtCombinacionesPruebaJavaScript" disabled value="" class="form-control" />
+                        </div>
+			        </div>
+			    </div>
+		    </div>
+		    
+		    <div class="d-none" id="divPruebaAPIWeb">
+			    <p>
+				    Para que esta aplicación funcione correctamente CORS tiene que estar activado. Podés agregar esta extensión desde acá: <a href="https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi">https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi</a>
+			    </p>
+			    <div>
+				    <label>Usuario</label>
+				    <input type="text" id="txt-usuario" value="admin" style="width: 300px; font-size: 14px; padding: 5px" />
+			    </div>
+			    <div>
+				    <label>Alfabeto de la clave</label>
+				    <input type="text" id="txt-alfabeto" value="abcdefghijkmnñopqrstuvwxyz" style="width: 300px; font-size: 14px; padding: 5px" />
+			    </div>
+			    <div>
+				    <input type="button" class="btn-empezar" value="Empezar" style="padding: 4px" />
+			    </div>
+			    <div>
+				    <label>Resultado</label>
+			    </div>
+			    <div id="div-resultado" style="border: 1px solid black; background-color: black; color: white; height: 60px; overflow-y: auto; padding: 8px">
+				    
+			    </div>
+		    </div>
+        </div>
 		
-		<div>
-			<p>
-				Para que esta aplicación funcione correctamente CORS tiene que estar activado. Podés agregar esta extensión desde acá: <a href="https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi">https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi</a>
-			</p>
-			<div>
-				<label>Usuario</label>
-				<input type="text" id="txt-usuario" value="admin" style="width: 300px; font-size: 14px; padding: 5px" />
-			</div>
-			<div>
-				<label>Alfabeto de la clave</label>
-				<input type="text" id="txt-alfabeto" value="abcdefghijkmnñopqrstuvwxyz" style="width: 300px; font-size: 14px; padding: 5px" />
-			</div>
-			<div>
-				<input type="button" id="btn-empezar" value="Empezar" style="padding: 4px" />
-			</div>
-			<div>
-				<label>Resultado</label>
-			</div>
-			<div id="div-resultado" style="border: 1px solid black; background-color: black; color: white; height: 60px; overflow-y: auto; padding: 8px">
-				
-			</div>
-		</div>
 
 		<script type="text/javascript">
             $(document).ready(function() {
+                // Variables.
                 var encontreClave = false;
 				var pruebaEnJS = true;
-				var clavePrueba = "ZZZZZZ";
+				var clavePrueba = "";
 				var hacerPeticion = null;
+				var alfabeto = null;
+				var longitudClave = 4;
+				var combinaciones = 0;
+				var inicioDate = null;
+				
+				// Eventos.
+				$("#chkPruebaAPIWeb").click(function() {
+    				$("#divPruebaAPIWeb").removeClass("d-none");
+    				$("#divPruebaJavaScript").addClass("d-none");
+				});
+				
+				$("#chkPruebaJavaScript").click(function() {
+				    $("#divPruebaAPIWeb").addClass("d-none");
+				    $("#divPruebaJavaScript").removeClass("d-none");
+				});
+				
+				$("#txtAlfabetoPruebaJavaScript").keypress(function() {
+				    var alfabeto = $("#txtAlfabetoPruebaJavaScript").val();
+				    $("#spanLongitudAlfabeto").text(alfabeto.length);
+				});
+				
+				$("#txtAlfabetoPruebaJavaScript").change(function() {
+				    alfabeto = $("#txtAlfabetoPruebaJavaScript").val();
+				    $("#spanLongitudAlfabeto").text(alfabeto.length);
+				});
+				
+	            $(".btn-empezar").click(function() {
+	                empezar();
+	            });
+	            
+	            // Funciones.
+	            function imprimirPantalla(mensaje) {
+	                console.log(mensaje);
+	            }
+	            
+	            function formarClaveRec(claveFormada, indiceAlfabeto) {
+	                if (claveFormada.length === longitudClave) {
+	                    hacerPeticion(claveFormada);
+	                    return;
+	                }
+	                var nuevaClave = claveFormada + alfabeto[indiceAlfabeto];
+	                for (var i = 0; i < alfabeto.length; i++) {
+	                    formarClaveRec(nuevaClave, i);
+	                }
+	            }
+	            
+	            function empezar() {
+	                longitudClave = parseInt($("#txtLongitudClavePruebaJavaScript").val());
+	                if (isNaN(longitudClave)) {
+	                    alert("Error en la longitud de la clave");
+	                    return;
+	                }
+	                if (longitudClave <= 0) {
+	                    alert("Error en la longitud de la clave");
+	                    return;
+	                }
+	                calcularClavePrueba();
+	                combinaciones = 0;
+	                inicioDate = new Date();
+	                imprimirPantalla("Formando claves...");
+	                formarClaveRec("", 0);
+	                console.log(combinaciones);
+	                var finDate = new Date();
+	                
+	                $(".div-resultados").removeClass("d-none");
+	                
+	                var ms = finDate - inicioDate;
+	                var minutos = ms / 60000.0;
+	                $("#txtTiempoPruebaJavaScript").val(minutos);
+	                
+	                $("#txtCombinacionesPruebaJavaScript").val(combinaciones);
+	            }
+	            
+	            function calcularClavePrueba() {
+	                for (var i = 0; i < longitudClave; i++) {
+				        clavePrueba += alfabeto[alfabeto.length - 1];
+				    }
+	            }
+	            
+	            // Setup.
 				if (pruebaEnJS) {
+				    alfabeto = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
+				    $("#txtAlfabetoPruebaJavaScript").val(alfabeto);
+				    $("#spanLongitudAlfabeto").text(alfabeto.length);
+				    $("#txtLongitudClavePruebaJavaScript").val(longitudClave);
+				    
+					hacerPeticion = function(clave) {
+					    combinaciones++;
+					    if (combinaciones % 1000000 == 0) {
+					        console.log(combinaciones);
+					    }
+						if (clave === clavePrueba) {
+							
+						}
+					}
+				} else {
+				    alfabeto = "abcdefghijklmnopqrstuvwxyz";
 					hacerPeticion = function(clave){
 						$.ajax({
 							url: "../index.php",
@@ -65,50 +209,7 @@
 							}
 						});
 					}
-				} else {
-					hacerPeticion = function(clave){
-						if (clave === clavePrueba) {
-							
-						}
-					}
 				}
-				
-	            $("#btn-empezar").click(function() {
-	                empezar();
-	            });
-	            
-	            function imprimirPantalla(mensaje) {
-	                console.log(mensaje);
-	            }
-	            
-	            function empezar() {
-	                var alfabeto = $("#txt-alfabeto").val();
-	                var claves = alfabeto.split();
-	                
-	                imprimirPantalla("Formando claves...");
-	                for(var i=0; i<alfabeto.length; i++){
-		                for(var j=0; j<alfabeto.length; j++){
-			                for(var k=0; k<alfabeto.length; k++){
-				                for(var m=0; m<alfabeto.length; m++){
-					                var clave = alfabeto[i] + alfabeto[j] + alfabeto[k] + alfabeto[m];
-					                claves.push(clave);
-				                }
-			                }
-		                }
-	                }
-	                imprimirPantalla("Claves formadas: " + claves.length);
-	                
-	                var indiceClaveActual = 0;
-	                var intervalo = setInterval(function(){
-		                if(!encontreClave){
-			                imprimirPantalla("Probando con clave " + claves[indiceClaveActual]);
-			                hacerPeticion(claves[indiceClaveActual]);
-			                indiceClaveActual++;
-		                }else{
-			                clearInterval(intervalo);
-		                }
-	                }, 1);
-	            }
             });
 		</script>
 	</body>
