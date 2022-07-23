@@ -1,10 +1,9 @@
 <?php
     $type = "";
-
-    $dbhost = "localhost";
-    $dbuser = "root";
-    $dbpass = "";
-    $dbname = "nsa";
+    $dbhost = getenv("DB_HOST");
+    $dbuser = getenv("DB_USER");
+    $dbpass = getenv("DB_PASSWORD");
+    $dbname = getenv("DB_NAME");
 
     $link = mysqli_connect($dbhost, $dbuser, $dbpass);
     mysqli_select_db($link, $dbname) or die(mysqli_error($link));
