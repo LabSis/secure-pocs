@@ -1,3 +1,7 @@
+ -- Obsoleto --
+ 
+ Revisar el repositorio: https://github.com/Gochip/desarrollo-seguro-plataformas-web
+
 Proof of Concept (English version)
 =====================================
 
